@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>Məhsullara baxış</title>
+
+  <!-- Bootstrap core CSS -->
+  <link href="../css/details/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Custom fonts for this template -->
+  <link href="https://fonts.googleapis.com/css?family=Catamaran:100,200,300,400,500,600,700,800,900" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Lato:100,100i,300,300i,400,400i,700,700i,900,900i" rel="stylesheet">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css" integrity="sha384-r4NyP46KrjDleawBgD5tp8Y7UzmLA05oM1iAEQ17CSuDqnUK2+k9luXQOfXJCJ4I" crossorigin="anonymous">
+
+  <!-- Custom styles for this template -->
+  <link href="../css/details/one-page-wonder.min.css" rel="stylesheet">
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-173551031-1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-173551031-1');
+  </script>
+
+
+</head>
+
+<body ng-app="myProjectApp" ng-controller="detailsController">
+
+  <!-- Navigation -->
+  <nav class="navbar navbar-expand-lg navbar-dark navbar-custom fixed-top">
+    <div class="container">
+      <a class="navbar-brand" href="/">Ana Səhifə</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="/register">Yeni istifadəçi</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/login">Daxil ol</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <header class="masthead text-center text-white">
+    <div class="masthead-content">
+      <div class="container">
+        <h1 class="masthead-heading mb-0">Qeydiyyatdan indi keçin</h1>
+        <h2 class="masthead-subheading mb-0" style="font-family: 'Times New Roman'">Bonuslar qazanaraq, təbii və keyfiyyətli məhsullarımızdan alın</h2>
+        <a href="/register" class="btn btn-success btn-xl rounded-pill mt-5">Qeydiyyatdan keç</a>
+      </div>
+    </div>
+    <div class="bg-circle-1 bg-circle"></div>
+    <div class="bg-circle-2 bg-circle"></div>
+    <div class="bg-circle-3 bg-circle"></div>
+    <div class="bg-circle-4 bg-circle"></div>
+  </header>
+
+  <section style="background-color: linen;">
+    <br>
+    <div class="col-md-12">
+    <div class="col-md-12">
+    <div class="row">
+
+      <div class="col-md-2">
+        <label><strong>Məhsulun adını seçin</strong></label>
+        <select class="form-control" ng-model="selectedValue">
+          <option selected>----------</option>
+          <option ng-repeat="elem in subproducts" >{{elem.name}}</option>
+        </select>
+      </div>
+      <div class="col-md-2">
+        <label><strong>Sayını seçin</strong></label>
+        <input type="text" class="form-control" ng-model="inputPrice" ng-change="changeInputPrice(inputPrice)">
+      </div>
+      <div class="col-md-1">
+        <br>
+        <button class="btn btn-primary btn-md" ng-click="calculateResult()">Hesabla</button>
+      </div>
+      <div class="col-md-2">
+        <label><strong>Yekun Qiymət</strong></label>
+        <input type="text" class="form-control" disabled value="{{result}} AZN">
+      </div>
+      </div>
+      </div>
+    </div>
+    <br>
+  </section>
+
+
+
+
+  <section>
+    <div class="container" ng-repeat="elem in subproducts">
+      <div class="row align-items-center">
+        <div class="col-lg-6">
+          <div class="p-5">
+            <img class="img-fluid rounded-circle" ng-src="{{elem.photo}}" alt="">
+          </div>
+        </div>
+        <div class="col-lg-6">
+          <div class="p-5">
+            <h2 class="display-4" ng-bind="elem.name">For those about to rock...</h2>
+            <p><strong>Ətraflı:</strong>{{elem.description}}</p>
+            <p><strong>Tip: </strong>{{elem.type}}</p>
+            <p style="color: green"><strong>Qiyməti: </strong>{{elem.price}} AZN</p>
+            <br>
+            <button class="btn btn-success form-control" data-toggle="modal" data-target="#orderProduct">Sifariş et</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+
+  <!-- Footer -->
+  <footer class="py-5 bg-black">
+    <div class="container">
+      <p class="m-0 text-center text-white small">Müəllif hüquqları &copy; tastysupplies.com 2020</p>
+    </div>
+    <!-- /.container -->
+  </footer>
+
+  <div class="modal fade" id="orderProduct" role="dialog">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header panel panel-blue">
+          <h3 class="modal-title" style="color: black; text-align: center; ">
+            <strong class="align-content-center" style="text-align: center;font-family: 'Times New Roman'">Məhsul sifarişi</strong>
+          </h3>
+        </div>
+        <div class="modal-body">
+          <form>
+            <div class="row">
+              <div class="col-md-12">
+                <p style="font-family: 'Times New Roman'">Hörmətli müştəri, seçdiyiniz məhsul üzrə sifariş vermək üçün sistemə daxil olmalısınız.</p>
+              </div>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <div class="row" style="align-items: center">
+            <div class="col-md-12">
+              <button type="button" class="btn btn-info fa-pull-left"
+                      data-dismiss="modal" onclick="location.href='/register'" style="font-family: 'Times New Roman'">Qeydiyyat</button>
+                <button type="button" class="btn btn-primary fa-pull-left"
+                        data-dismiss="modal" onclick="location.href='/login'" style="font-family: 'Times New Roman'">Daxil ol</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <script src="../angular/angular.js"></script>
+  <script src="../angular/projectApp.js"></script>
+  <script src="../angular/details/detailsController.js"></script>
+  <script src="../angular/details/detailsService.js"></script>
+
+
+
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.min.js" integrity="sha384-oesi62hOLfzrys4LxRF63OJCXdXDipiYWBnvTl9Y9/TRlw5xlKIEHpNyvvDShgf/" crossorigin="anonymous"></script>
+</body>
+
+</html>

@@ -1,0 +1,602 @@
+<!doctype html>
+<html class="no-js" lang="en">
+
+<head>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-173551031-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-173551031-1');
+    </script>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Sufee Admin - HTML5 Admin Template</title>
+    <meta name="description" content="Sufee Admin - HTML5 Admin Template">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+    <link rel="stylesheet" href="css/adminView/bootstrap.min.css">
+    <link rel="stylesheet" href="css/adminView/font-awesome.min.css">
+    <link rel="stylesheet" href="css/adminView/themify-icons.css">
+    <link rel="stylesheet" href="css/adminView/cs-skin-elastic.css">
+    <link rel="stylesheet" href="css/adminView/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" href="css/adminView/buttons.bootstrap4.min.css">
+
+
+    <link rel="stylesheet" href="css/adminView/jqvmap.min.css">
+
+
+    <link rel="stylesheet" href="css/adminView/style.css">
+
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800' rel='stylesheet' type='text/css'>
+    <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+<body ng-app="myProjectApp" ng-controller="subProductController">
+
+
+<!-- Left Panel -->
+
+<aside id="left-panel" class="left-panel">
+    <nav class="navbar navbar-expand-sm navbar-default">
+
+        <div class="navbar-header">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#main-menu"
+                    aria-controls="main-menu" aria-expanded="false" aria-label="Toggle navigation">
+                <i class="fa fa-bars"></i>
+            </button>
+        </div>
+
+        <div id="main-menu" class="main-menu collapse navbar-collapse">
+            <ul class="nav navbar-nav">
+                <li class="menu-item">
+                    <a href="/adminView"> <i class="menu-icon fa fa-dashboard"></i>Dashboard </a>
+                </li>
+                <h3 class="menu-title">Control Panel</h3><!-- /.menu-title -->
+                <li class="menu-item-has-children dropdown active">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
+                       aria-expanded="false"> <i class="menu-icon fa fa-laptop"></i>Components</a>
+                    <ul class="sub-menu children dropdown-menu">
+                        <li><i class="fa fa-puzzle-piece"></i><a href="/adminProduct">Ana məhsullar</a></li>
+                        <li><i class="fa fa-id-badge"></i><a href="/adminSubProduct">Məhsullar</a></li>
+                        <li><i class="fa fa-bars"></i><a href="/adminOrders">Sifarişlər</a></li>
+                        <li><i class="fa fa-share-square-o"></i><a href="/adminCustomer">Müştərinin məlumatları</a></li>
+                        <li><i class="fa fa-id-card-o"></i><a href="/adminMessage">Mesajlar</a></li>
+                        <li><i class="fa fa-id-card-o"></i><a href="/adminStore">Depo</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div><!-- /.navbar-collapse -->
+    </nav>
+</aside><!-- /#left-panel -->
+
+<!-- Left Panel -->
+
+<!-- Right Panel -->
+
+<div id="right-panel" class="right-panel">
+
+    <!-- Header-->
+    <header id="header" class="header">
+
+        <div class="header-menu">
+
+            <div class="col-sm-7">
+                <div class="page-title">
+                    <a id="menuToggle" class="menutoggle pull-left"><i class="fa fa fa-tasks"></i></a>
+                    <h5 style="font-style:italic;color:purple">Məhsullar</h5>
+                </div>
+            </div>
+
+            <div class="col-sm-5">
+                <div class="user-area dropdown float-right">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
+                       aria-expanded="false">
+                        <img class="user-avatar rounded-circle" ng-src="{{photo}}">Səhifənizə xoş gəlmisiniz
+                        <h4 ng-bind="getUser.name" style="color: green; text-align: center"></h4>
+                    </a>
+
+                    <div class="user-menu dropdown-menu">
+                        <a class="nav-link" href="/adminProduct"><i class="fa fa-user"></i> Ana məhsullar</a>
+
+                        <a class="nav-link" href="/adminSubProduct"><i class="fa fa-user"></i> Məhsullar</a>
+                        <a class="nav-link" href="/adminCustomer"><i class="fa fa-user"></i> Müştərilər</a>
+                        <a class="nav-link" href="/adminMessage"><i class="fa fa-user"></i> Mesajlar
+                            <h7 style="color: white; background-color: black">{{getMessage}}</h7>
+                        </a>
+
+
+                        <a class="nav-link" href="/logout"><i class="fa fa-power-off"></i> Çıxış</a>
+                    </div>
+                </div>
+
+                <div class="language-select dropdown" id="language-select">
+                    <a class="dropdown-toggle" href="#" data-toggle="dropdown" id="language" aria-haspopup="true"
+                       aria-expanded="true">
+                        <i class="flag-icon flag-icon-us"></i>
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="language">
+                        <div class="dropdown-item">
+                            <span class="flag-icon flag-icon-fr"></span>
+                        </div>
+                        <div class="dropdown-item">
+                            <i class="flag-icon flag-icon-es"></i>
+                        </div>
+                        <div class="dropdown-item">
+                            <i class="flag-icon flag-icon-us"></i>
+                        </div>
+                        <div class="dropdown-item">
+                            <i class="flag-icon flag-icon-it"></i>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </header><!-- /header -->
+    <!-- Header-->
+
+
+
+    <div class="content mt-3">
+
+        <div class="col-xl-4 col-lg-6">
+            <div class="card">
+                <div class="card-body">
+                    <div class="stat-widget-one">
+                        <div class="stat-icon dib"><i class="fa fa-briefcase"></i></div>
+                        <div class="stat-content dib">
+                            <div class="stat-text">Aktiv məhsullar</div>
+                            <div class="stat-digit" ng-bind="allActive"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="col-xl-4 col-lg-6">
+            <div class="card">
+                <div class="card-body">
+                    <div class="stat-widget-one">
+                        <div class="stat-icon dib"><i class="fa fa-trash"></i></div>
+                        <div class="stat-content dib">
+                            <div class="stat-text">Deaktiv məhsullar</div>
+                            <div class="stat-digit" ng-bind="allDeactive"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="col-xl-4 col-lg-6">
+            <div class="card">
+                <div class="card-body">
+                    <div class="stat-widget-one">
+                        <div class="stat-icon dib"><i class="fa fa-bars"></i></div>
+                        <div class="stat-content dib">
+                            <div class="stat-text">Ana məhsulla bağlantısı olmayan məhsullar</div>
+                            <div class="stat-digit" ng-bind="allNonConnect">770</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="card">
+            <div class="card-header">
+                <span><strong>Yeni məhsul</strong></span>
+            </div>
+            <div class="card-body">
+                <div id="bootstrap-data-table-export_wrapper" class="dataTables_wrapper dt-bootstrap4 no-footer">
+                    <form>
+                        <div class="row">
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <label>Məhsulun şəkil yolu</label>
+                                    <input class="form-control" type="text" ng-model="newService.photo">
+                                    <p>Image must be 700x700</p>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Məhsulun adı</label>
+                                    <input class="form-control" type="text" ng-model="newService.name">
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <label>Məhsil qiyməti</label>
+                                    <input class="form-control" type="number" ng-model="newService.price" placeholder="AZN">
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <label>Məhsulun tipi</label>
+                                    <select class="form-control" ng-model="newService.type">
+                                        <option>Kq</option>
+                                        <option>Litr</option>
+                                        <option>Ədəd</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <label>Məhsulun statusu</label>
+                                    <select class="form-control" ng-model="newService.status">
+                                        <option>Aktiv</option>
+                                        <option>Deaktiv</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label>Məhsul haqqında məlumat</label>
+                                    <textarea class="form-control" rows="5" maxlength="350" ng-model="newService.description"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-8">
+                                <a class="btn btn-primary pull-left btn-md" href="/adminProduct">Bağlantı</a>
+                            </div>
+                            <div class="col-md-4">
+                                <button class="btn btn-danger pull-right btn-md" ng-click="clearField()">Təmizlə</button>
+                                <button class="btn btn-success pull-right btn-md" style="margin-right: 10px" ng-click="insertSubProduct(newService)">Daxil et</button>
+                            </div>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-header">
+                <span><strong>Bütün məhsullar</strong></span>
+            </div>
+            <div class="card-body">
+                <div class="dataTables_wrapper dt-bootstrap4 no-footer">
+
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <table class="table table-striped table-bordered dataTable no-footer" role="grid"
+                                   aria-describedby="bootstrap-data-table-export_info">
+                                <thead>
+                                <tr role="row">
+                                    <th class="sorting_asc" tabindex="0"
+                                        aria-controls="bootstrap-data-table-export" rowspan="1" colspan="1"
+                                        aria-sort="ascending"
+                                        aria-label="Name: activate to sort column descending"
+                                        style="width: 50px;">ID
+                                    </th>
+                                    <th class="sorting" tabindex="0" aria-controls="bootstrap-data-table-export"
+                                        rowspan="1" colspan="1"
+                                        aria-label="Position: activate to sort column ascending"
+                                        style="width: 306px;">Adı
+                                    </th>
+                                    <th class="sorting" tabindex="0" aria-controls="bootstrap-data-table-export"
+                                        rowspan="1" colspan="1"
+                                        aria-label="Office: activate to sort column ascending"
+                                        style="width: 300px;">Qeyd
+                                    </th>
+                                    <th class="sorting" tabindex="0" aria-controls="bootstrap-data-table-export"
+                                        rowspan="1" colspan="1"
+                                        aria-label="Position: activate to sort column ascending"
+                                        style="width: 50px;">Qiyməti
+                                    </th>
+                                    <th class="sorting" tabindex="0" aria-controls="bootstrap-data-table-export"
+                                        rowspan="1" colspan="1"
+                                        aria-label="Salary: activate to sort column ascending"
+                                        style="width: 104px;">Sayı
+                                    </th>
+                                    <th class="sorting" tabindex="0" aria-controls="bootstrap-data-table-export"
+                                        rowspan="1" colspan="1"
+                                        aria-label="Position: activate to sort column ascending"
+                                        style="width: 120px;">Statusu
+                                    </th>
+                                    <th class="sorting" tabindex="0" aria-controls="bootstrap-data-table-export"
+                                        rowspan="1" colspan="1"
+                                        aria-label="Position: activate to sort column ascending"
+                                        style="width: 120px;">Əməliyyat
+                                    </th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr role="row" class="odd" ng-repeat="elem in service">
+                                    <td class="sorting_1" ng-bind="elem.id"></td>
+                                    <td ng-bind="elem.name"></td>
+                                    <td ng-bind="elem.description"></td>
+                                    <td ng-bind="elem.price"></td>
+                                    <td ng-bind="elem.type"></td>
+                                    <td ng-bind="elem.status"></td>
+                                    <td>
+                                        <a href="" data-toggle="modal" data-target="#lookModal" title="Bax" class="btn btn-info" ng-click="checkSubService(elem.id)"><i class="fa fa-eye"></i></a>
+                                        <a href="" data-toggle="modal" data-target="#editModal" title="Dəyiş" class="btn btn-warning" ng-click="checkSubService(elem.id)"><i class="fa fa-edit"></i></a>
+                                        <a href="" data-toggle="modal" data-target="#deleteModal" title="Sil" class="btn btn-danger" ng-click="checkSubService(elem.id)"><i class="fa fa-trash"></i></a>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <div class="modal fade" id="editModal" role="dialog">
+            <div class="modal-dialog modal-md">
+                <div class="modal-content" ng-repeat="editSubService in subServices">
+                    <div class="modal-header panel panel-red">
+                        <h3 class="modal-title" style="color: black; text-align: center;">
+                            <strong class="align-content-center"
+                                    style="text-align: center;font-family: 'Times New Roman'">
+                                <center>Seçilmiş məhsul haqqında məlumat</center>
+                            </strong>
+                        </h3>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <img ng-src="{{editSubService.photo}}">
+                                <br>
+                                <input type="text" class="form-control" placeholder="Image way" ng-model="editSubService.photo">
+                                <br>
+                                <span>Image size must be 700x700</span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>ID</label>
+                                    <input class="text-dark form-control" type="text" ng-model="editSubService.id" disabled>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Tipi</label>
+                                    <input class="text-dark form-control" type="text" ng-model="editSubService.type">
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Statusu</label>
+                                    <select class="form-control" ng-model="editSubService.status">
+                                        <option>Aktiv</option>
+                                        <option>Deaktiv</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label>Adı</label>
+                                    <input class="text-dark form-control" type="text" ng-model="editSubService.name">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label>Haqqında</label>
+                                    <textarea class="form-control" rows="5" maxlength="350"
+                                              ng-model="editSubService.description"></textarea>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <div class="col-md-12">
+                            <div class="col-md-1">
+
+                            </div>
+                            <div class="col-md-5">
+                                <button type="button" class="btn btn-danger fa-pull-left"
+                                        data-dismiss="modal">
+                                    Bağla
+                                </button>
+                            </div>
+                            <div class="col-md-5">
+                                <button type="button" class="btn btn-success fa-pull-right"
+                                        data-dismiss="modal" ng-click="updateSubProduct(editSubService)">
+                                   Dəyiş
+                                </button>
+                            </div>
+                            <div class="col-md-1">
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade" id="lookModal" role="dialog">
+            <div class="modal-dialog modal-md">
+                <div class="modal-content">
+                    <div class="modal-header panel panel-red">
+                        <h3 class="modal-title" style="color: black; text-align: center;">
+                            <strong class="align-content-center"
+                                    style="text-align: center;font-family: 'Times New Roman'">
+                                <center>Seçilmiş məhsul haqqında məlumat</center>
+                            </strong>
+                        </h3>
+                    </div>
+                    <div class="modal-body" ng-repeat="editSubService in subServices">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>ID</label>
+                                    <span class="text-dark form-control" disabled>{{editSubService.id}}</span>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Tipi</label>
+                                    <span class="text-dark form-control" disabled>{{editSubService.type}}</span>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Statusu</label>
+                                    <span class="text-dark form-control" disabled>{{editSubService.status}}</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label>Adı</label>
+                                    <span class="text-dark form-control">{{editSubService.name}}</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label>Haqqında</label>
+                                    <textarea class="form-control" readonly>{{editSubService.description}}</textarea>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <div class="col-md-12">
+                            <div class="col-md-1">
+
+                            </div>
+                            <div class="col-md-5">
+                                <button type="button" class="btn btn-danger fa-pull-left"
+                                        data-dismiss="modal">
+                                    Bağla
+                                </button>
+                            </div>
+                            <div class="col-md-1">
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade" id="deleteModal" role="dialog">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header panel panel-red">
+                        <h3 class="modal-title" style="color: black; text-align: center;">
+                            <strong class="align-content-center"
+                                    style="text-align: center;font-family: 'Times New Roman'">
+                                <center>Seçilmiş məhsulu silməyinizə əminsinizmi??</center>
+                            </strong>
+                        </h3>
+                    </div>
+                    <div class="modal-body" ng-repeat="editSubService in subServices">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>ID</label>
+                                    <span class="text-dark form-control" disabled>{{editSubService.id}}</span>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Tipi</label>
+                                    <span class="text-dark form-control" disabled>{{editSubService.type}}</span>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Statusu</label>
+                                    <span class="text-dark form-control" disabled>{{editSubService.status}}</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label>Adı</label>
+                                    <span class="text-dark form-control">{{editSubService.name}}</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label>Haqqında</label>
+                                    <textarea class="form-control" readonly>{{editSubService.description}}</textarea>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+
+                <div class="modal-footer">
+                    <div class="col-md-12">
+                        <div class="col-md-1">
+
+                        </div>
+                        <div class="col-md-5">
+                            <button type="button" class="btn btn-danger fa-pull-left"
+                                    data-dismiss="modal">
+                                Bağla
+                            </button>
+                        </div>
+                        <div class="col-md-5">
+                            <button type="button" class="btn btn-success fa-pull-right"
+                                    data-dismiss="modal" ng-click="deleteSubProduct()">
+                                Məhsulu sil
+                            </button>
+                        </div>
+                        <div class="col-md-1">
+
+                        </div>
+                    </div>
+                </div>
+                </div>
+                </div>
+            </div>
+        </div>
+    </div> <!-- .content -->
+</div><!-- /#right-panel -->
+
+
+<script src="../angular/angular.js"></script>
+<script src="../angular/projectApp.js"></script>
+<script src="../angular/adminSubProduct/adminSubProductController.js"></script>
+<script src="../angular/adminSubProduct/adminSubProductService.js"></script>
+<!-- Right Panel -->
+
+<script src="js/adminView/jquery.min.js"></script>
+<script src="js/adminView/popper.min.js"></script>
+<script src="js/adminView/bootstrap.min.js"></script>
+<script src="js/adminView/main.js"></script>
+<script src="js/adminView/jquery.dataTables.min.js"></script>
+<script src="js/adminView/dataTables.bootstrap4.min.js"></script>
+<script src="js/adminView/dataTables.buttons.min.js"></script>
+<script src="js/adminView/buttons.bootstrap4.min.js"></script>
+<script src="js/adminView/jszip.min.js"></script>
+<script src="js/adminView/datatables-init.js"></script>
+<script src="js/adminView/buttons.html5.min.js"></script>
+<script src="js/adminView/buttons.print.min.js"></script>
+<script src="js/adminView/buttons.colVis.min.js"></script>
+
+
+<!--<script src="js/adminView/jquery.vmap.sampledata.js"></script>-->
+
+
+
+</body>
+
+</html>

@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <title>
+        Ana Səhifə
+    </title>
+    <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no'
+          name='viewport'/>
+    <!--     Fonts and icons     -->
+    <link rel="stylesheet" type="text/css"
+          href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
+    <!-- CSS Files -->
+    <link href="../css/userView/material-dashboard.css" rel="stylesheet"/>
+    <!-- CSS Just for demo purpose, don't include it in your project -->
+    <link href="../css/userView/demo.css" rel="stylesheet"/>
+    <link href="../css/userBalance/pageCss.css" rel="stylesheet"/>
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-173551031-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-173551031-1');
+    </script>
+
+</head>
+
+<body ng-app="myProjectApp" ng-controller="userBalanceController">
+<div class="wrapper ">
+    <div class="sidebar" data-color="purple" data-background-color="white">
+        <div class="logo">
+            <a href="/userView" class="simple-text logo-normal">
+                Şəxsi kabinet - {{userData.name}}
+            </a>
+            <p>Ayşə</p>
+        </div>
+        <div class="sidebar-wrapper">
+            <ul class="nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="/userDashboard">
+                        <i class="material-icons" style="color: red">dashboard</i>
+                        <p>Ana Səhifə</p>
+                    </a>
+                </li>
+                <li class="nav-item ">
+                    <a class="nav-link" href="/userView">
+                        <i class="material-icons" style="color: blue">person</i>
+                        <p>Şəxsi məlumatlarınız</p>
+                    </a>
+                </li>
+                <li class="nav-item ">
+                    <a class="nav-link" href="/userTable">
+                        <i class="material-icons" style="color: darkgreen">add_shopping_cart</i>
+                        <p>Məhsullar</p>
+                    </a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="/userBalance">
+                        <i class="material-icons" style="color: mediumvioletred">account_balance_wallet</i>
+                        <div class="row">
+                            <p>Balans məlumatları</p>
+                        </div>
+                    </a>
+                </li>
+                <li class="nav-item ">
+                    <a class="nav-link" href="/userMessage">
+                        <i class="material-icons" style="color: darkorange">library_books</i>
+                        <div class="row">
+                            <p>Mesajlar</p>
+                        </div>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="main-panel">
+        <!-- Navbar -->
+        <nav class="navbar navbar-expand-lg navbar-transparent navbar-absolute fixed-top ">
+            <div class="container-fluid">
+                <div class="navbar-wrapper">
+                    <a class="navbar-brand" href="#pablo">Dashboard</a>
+                </div>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" aria-controls="navigation-index"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="navbar-toggler-icon icon-bar"></span>
+                    <span class="navbar-toggler-icon icon-bar"></span>
+                    <span class="navbar-toggler-icon icon-bar"></span>
+                </button>
+                <div class="collapse navbar-collapse justify-content-end">
+
+                    <ul class="navbar-nav">
+                        <li class="nav-item dropdown" style="pointer-events: none">
+                            <a class="nav-link" href="http://example.com" id="navbarDropdownMenuLink"
+                               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="material-icons">notifications</i>
+                                <span class="notification">0</span>
+                                <p class="d-lg-none d-md-block">
+                                    Some Actions
+                                </p>
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
+                                <a class="dropdown-item" href="#">Mike John responded to your email</a>
+                                <a class="dropdown-item" href="#">You have 5 new tasks</a>
+                                <a class="dropdown-item" href="#">You're now friend with Andrew</a>
+                                <a class="dropdown-item" href="#">Another Notification</a>
+                                <a class="dropdown-item" href="#">Another One</a>
+                            </div>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link" href="#pablo" id="navbarDropdownProfile" data-toggle="dropdown"
+                               aria-haspopup="true" aria-expanded="false">
+                                <i class="material-icons">person</i>
+                                <p class="d-lg-none d-md-block">
+                                    Account
+                                </p>
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownProfile">
+                                <a class="dropdown-item" href="/userView">Profil</a>
+                                <a class="dropdown-item" href="/userMessage">CEO-ya mail göndər</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="/logout">Çıxış</a>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        <!-- End Navbar -->
+        <br>
+        <br>
+        <div>
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-6 col-md-12 col-sm-12">
+                        <div class="card card-stats">
+                            <div class="card-header card-header-warning card-header-icon">
+                                <div class="card-icon">
+                                    <i class="material-icons">account_balance_wallet</i>
+                                </div>
+                                <p class="card-category">Cari balans</p>
+                                <h3 class="card-title">{{userBalans}}
+                                    <small>AZN</small>
+                                </h3>
+                            </div>
+                            <div class="card-footer">
+                                <div class="stats">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-12 col-sm-12">
+                        <div class="card card-stats">
+                            <div class="card-header card-header-danger card-header-icon">
+                                <div class="card-icon">
+                                    <i class="material-icons">card_giftcard</i>
+                                </div>
+                                <p class="card-category">Yığılmış bonuslar</p>
+                                <h3 class="card-title">{{userBonus.bonus}} AZN</h3>
+                            </div>
+                            <div class="card-footer">
+                                <div class="stats">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-12 col-md-12">
+                        <div class="card">
+                            <div class="card-header card-header-warning">
+                                <h4 class="card-title">Sifariş edilmiş məhsullar</h4>
+                                <p class="card-category">Məhsullar üzrə ödənişlər</p>
+                            </div>
+                            <div class="card-body table-responsive">
+                                <table class="table table-hover" style="text-align: center">
+                                    <thead class="text-warning">
+                                    <th>Məhsulun adı</th>
+                                    <th>Qiyməti (AZN)</th>
+                                    <th>Ödənilmiş məbləğ (AZN)</th>
+                                    <th>Qalıq məbləğ (AZN)</th>
+                                    <th>Tarix</th>
+                                    </thead>
+                                    <tbody ng-repeat="elem in allSell">
+                                    <tr>
+                                        <td ng-bind="elem.subProduct.name">1</td>
+                                        <td ng-bind="elem.sum_price">Dakota Rice</td>
+                                        <td ng-bind="elem.sum_price-elem.unpaid">$36,738</td>
+                                        <td ng-bind="elem.unpaid">$36,738</td>
+                                        <td ng-bind="elem.date">Niger</td>
+                                    </tr>
+                                    </tbody>
+                                    <tfoot>
+                                     <tr style="background-color: #7b0c32; color: white">
+                                         <td>Cəmi məbləğ</td>
+                                         <td>{{sellData.sum_price}}</td>
+                                         <td>{{sellData.sum_pay}}</td>
+                                         <td>{{sellData.sum_unpay}}</td>
+                                         <td></td>
+                                     </tr>
+                                    </tfoot>
+                                </table>
+                                <input type="button" class="btn btn-facebook" value="<< Geri" ng-click="goBack()">
+                                <input type="button" class="btn btn-facebook" value="İrəli >>" ng-click="goNext()">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-6 col-md-6">
+                        <div class="card">
+                            <div class="card-header card-header-danger">
+                                <h4 class="card-title">Balans</h4>
+                                <p class="card-category">Məhsullar üzrə ödənişlər və qalıq balans</p>
+                            </div>
+                            <div class="card-body table-responsive">
+                                <table class="table table-hover" style="text-align: center">
+                                    <thead class="text-warning">
+                                    <th>Ödəniş (AZN)</th>
+                                    <th>Balans (AZN)</th>
+                                    <th>Tarix</th>
+                                    </thead>
+                                    <tbody ng-repeat="elem in userAllBalance">
+                                    <tr>
+                                        <td ng-bind="elem.payment">1</td>
+                                        <td ng-bind="elem.balance">Dakota Rice</td>
+                                        <td ng-bind="elem.date">$36,738</td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                                <input type="button" class="btn btn-facebook" value="<< Geri" ng-click="goBackBalans()">
+                                <input type="button" class="btn btn-facebook" value="İrəli >>" ng-click="goNextBalans()">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-3">
+                        <figure class="highcharts-figure">
+                            <div id="container-speed" class="chart-container"></div>
+                        </figure>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" id="showData" role="dialog">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content" ng-repeat="elem in serviceValue">
+            <div class="modal-header panel panel-red">
+                <h3 class="modal-title" style="color: black; text-align: center;">
+                    <strong class="align-content-center" style="text-align: center;font-family: 'Times New Roman'"
+                            ng-bind="elem.name"></strong>
+                </h3>
+            </div>
+            <div class="modal-body">
+
+                <div class="row">
+                    <div class="col-md-3"></div>
+                    <div class="col-md-7">
+                        <img ng-src="{{elem.photo}}" style="align-items: center;width: 400px;">
+                    </div>
+                    <div class="col-md-2"></div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12 form-group">
+                        <h4 ng-bind="elem.description"></h4>
+                        <br>
+                    </div>
+                    <div class="col-md-2"></div>
+                    <div class="col-md-4" style="text-align: center">
+                        <span style="font-size: 25px;color: darkred">1 {{elem.type}}</span>
+                    </div>
+                    <div class="col-md-4" style="text-align: center">
+                        <span style="font-size: 25px;color: white;background-color: rebeccapurple">{{elem.price}} AZN</span>
+                    </div>
+                    <div class="col-md-2"></div>
+                </div>
+                <br>
+                <br>
+
+            </div>
+            <div class="modal-footer">
+
+                <div class="col-md-1">
+
+                </div>
+                <div class="col-md-5">
+                    <button type="button" class="btn btn-danger fa-pull-left"
+                            data-dismiss="modal">
+                        Bağla
+                    </button>
+                </div>
+                <div class="col-md-5">
+                    <button type="button" class="btn btn-success fa-pull-right"
+                            data-toggle="modal" data-target="#confirmModal">
+                        Müraciət et
+                    </button>
+                </div>
+                <div class="col-md-1">
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal modal-warning fade in" id="confirmModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Müraciət forması</h5>
+            </div>
+            <div class="modal-body">
+                <h3>Bu xidmətin alt xidmətləri üçün müraciət etmək istəyirsinizmi?</h3>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Bağla</button>
+                <a type="button" class="btn btn-danger"><i class="fa fa-check"></i>&nbsp;Bəli</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="../angular/angular.js"></script>
+<script src="../angular/projectApp.js"></script>
+<script src="../angular/userBalance/userBalanceController.js"></script>
+<script src="../angular/userBalance/userBalanceService.js"></script>
+
+<script src="../js/userView/jquery.min.js"></script>
+<script src="../js/userView/popper.min.js"></script>
+<script src="../js/userView/bootstrap-material-design.min.js"></script>
+<script src="../js/userView/perfect-scrollbar.jquery.min.js"></script>
+<script src="../js/userView/moment.min.js"></script>
+<script src="../js/userView/sweetalert2.js"></script>
+<script src="../js/userView/jquery.validate.min.js"></script>
+<script src="../js/userView/jquery.bootstrap-wizard.js"></script>
+<script src="../js/userView/bootstrap-selectpicker.js"></script>
+<script src="../js/userView/bootstrap-tagsinput.js"></script>
+<script src="../js/userView/jasny-bootstrap.min.js"></script>
+<script src="../js/userView/nouislider.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/core-js/2.4.1/core.js"></script>
+<script src="../js/userView/arrive.min.js"></script>
+<script src="../js/userView/bootstrap-notify.js"></script>
+<script src="../js/userView/material-dashboard.js" type="text/javascript"></script>
+<script src="../js/userView/demo.js"></script>
+
+<script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/highcharts-more.js"></script>
+<script src="https://code.highcharts.com/modules/solid-gauge.js"></script>
+<script src="https://code.highcharts.com/modules/exporting.js"></script>
+<script src="https://code.highcharts.com/modules/export-data.js"></script>
+<script src="https://code.highcharts.com/modules/accessibility.js"></script>
+
+<script>
+    setInterval(function () {
+        var bgColor = $("#bgDiv").css("color");
+        if (bgColor == "rgb(255, 255, 0)") {
+            $("#bgDiv").css("color", "White");
+            $("#bgDiv1").css("color", "White");
+            $("#bgDiv2").css("color", "White");
+            $("#bgDiv3").css("color", "White");
+        } else {
+            $("#bgDiv").css("color", "Yellow");
+            $("#bgDiv1").css("color", "Yellow");
+            $("#bgDiv2").css("color", "Yellow");
+            $("#bgDiv3").css("color", "Yellow");
+        }
+
+    }, 1500);
+</script>
+<script>
+    $(document).ready(function () {
+        md.initDashboardPageCharts();
+
+    });
+</script>
+</body>
+
+</html>

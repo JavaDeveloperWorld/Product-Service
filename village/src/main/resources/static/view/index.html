@@ -1,0 +1,684 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+
+    <title>Şəkidən evinizə</title>
+    <meta charset="utf-8">
+    <meta name="google-site-verification" content="muwHbKCnMB21mRMhzdNZPmH5zRmnrpohfRExaPTHAog" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700&display=swap" rel="stylesheet">
+    <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="../css/index/animate.css">
+
+    <link rel="stylesheet" href="../css/index/owl.carousel.min.css">
+    <link rel="stylesheet" href="../css/index/owl.theme.default.min.css">
+    <link rel="stylesheet" href="../css/index/magnific-popup.css">
+
+    <link rel="stylesheet" href="../css/index/aos.css">
+
+    <link rel="stylesheet" href="../css/index/ionicons.min.css">
+
+    <link rel="stylesheet" href="../css/index/bootstrap-datepicker.css">
+    <link rel="stylesheet" href="../css/index/jquery.timepicker.css">
+
+
+    <link rel="stylesheet" href="../css/index/flaticon.css">
+    <link rel="stylesheet" href="../css/index/icomoon.css">
+    <link rel="stylesheet" href="./css/index/style.css">
+
+	<style>
+		body {
+			font-family: Arial, Helvetica, sans-serif;
+		}
+
+		.flip-box {
+			background-color: transparent;
+			width: 300px;
+			height: 200px;
+			border: 1px solid #f1f1f1;
+			perspective: 1000px;
+		}
+
+		.flip-box-inner {
+			position: relative;
+			width: 100%;
+			height: 100%;
+			text-align: center;
+			transition: transform 0.8s;
+			transform-style: preserve-3d;
+		}
+
+		.flip-box:hover .flip-box-inner {
+			transform: rotateX(180deg);
+		}
+
+		.flip-box-front, .flip-box-back {
+			position: absolute;
+			width: 100%;
+			height: 100%;
+			-webkit-backface-visibility: hidden;
+			backface-visibility: hidden;
+		}
+
+		.flip-box-front {
+			background-color: lightblue;
+			color: black;
+		}
+
+		.flip-box-back {
+			background-color: orangered;
+			color: white;
+			transform: rotateX(180deg);
+		}
+	</style>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-173551031-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-173551031-1');
+    </script>
+
+</head>
+<body ng-app="myProjectApp" ng-controller="indexController">
+
+<nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
+    <div class="container-fluid px-md-4	">
+        <a class="navbar-brand" href="/">Village</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav"
+                aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="oi oi-menu"></span> Menu
+        </button>
+
+        <div class="collapse navbar-collapse" id="ftco-nav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item active"><a href="/" class="nav-link">Ana Səhifə</a></li>
+                <li class="nav-item"><a href="" ng-click="getAllSubProduct()" class="nav-link">Bütün məhsullarımız</a>
+                </li>
+                <li class="nav-item"><a href="" data-toggle="modal" data-target="#showProduct" class="nav-link">Hesaba
+                    yatırım</a></li>
+                <li class="nav-item cta mr-md-1"><a href="/register" class="nav-link">Yeni İstifadəçi</a></li>
+                <li class="nav-item cta cta-colored"><a href="/login" class="nav-link">Daxil ol</a></li>
+
+            </ul>
+        </div>
+    </div>
+</nav>
+<!-- END nav -->
+
+<div class="hero-wrap img">
+<div class="overlay"></div>
+<div class="container">
+    <div class="row d-md-flex no-gutters slider-text align-items-center justify-content-center">
+        <div class="col-md-10 d-flex align-items-center ftco-animate">
+            <div class="text text-center pt-5 mt-md-5">
+                <p class="mb-4">Təbii və keyfiyyətli məhsullarımızdan dada bilərsiniz</p>
+                <h1 class="mb-5">Şəkidən birbaşa sizin süfrələrinizə gətirdik</h1>
+                <div class="ftco-counter ftco-no-pt ftco-no-pb">
+                    <div class="row">
+                        <div class="col-md-4 d-flex justify-content-center counter-wrap ftco-animate">
+                            <div class="block-18">
+                                <div class="text d-flex">
+                                    <div class="icon mr-2">
+                                        <img src="../img/index/team.png">
+                                    </div>
+                                    <div class="desc text-left">
+                                        <strong class="number">{{pageInfo.customer_count}}</strong>
+                                        <span>Daimi müştərilər</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 d-flex justify-content-center counter-wrap ftco-animate">
+                            <div class="block-18 text-center">
+                                <div class="text d-flex">
+                                    <div class="icon mr-2">
+                                        <img src="../img/index/sales.png">
+                                    </div>
+                                    <div class="desc text-left">
+                                        <strong class="number">{{pageInfo.sells}}</strong>
+                                        <span>Satışlar</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 d-flex justify-content-center counter-wrap ftco-animate">
+                            <div class="block-18 text-center">
+                                <div class="text d-flex">
+                                    <div class="icon mr-2">
+                                        <img src="../img/index/gift.png">
+                                    </div>
+                                    <div class="desc text-left">
+                                        <strong class="number">{{pageInfo.bonus}} AZN</strong>
+                                        <span>Ümumi bonus</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="ftco-search my-md-5">
+                    <div class="row">
+                        <div class="col-md-12 nav-link-wrap">
+                            <div class="nav nav-pills text-center" id="v-pills-tab" role="tablist"
+                                 aria-orientation="vertical">
+                                <a class="nav-link active mr-md-1" id="v-pills-1-tab" data-toggle="pill"
+                                   href="#v-pills-1" role="tab" aria-controls="v-pills-1" aria-selected="true">Məhsulu
+                                    axtarın</a>
+
+
+                            </div>
+                        </div>
+                        <div class="col-md-12 tab-wrap">
+
+                            <div class="tab-content p-4" id="v-pills-tabContent">
+
+                                <div class="tab-pane fade show active" id="v-pills-1" role="tabpanel"
+                                     aria-labelledby="v-pills-nextgen-tab">
+                                    <form action="#" class="search-job">
+                                        <div class="row no-gutters">
+                                            <div class="col-md mr-md-2">
+                                                <div class="form-group">
+                                                    <div class="form-field">
+                                                        <div class="select-wrap">
+                                                            <div class="icon"><span class="fa fa-times"></span></div>
+                                                            <select class="form-control" ng-model="selectedProduct"
+                                                                    ng-change="getSubSelected(selectedProduct)">
+                                                                <option value="" disabled selected>Ana məhsullar
+                                                                </option>
+                                                                <option ng-repeat="elem in products">{{elem.name}}</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md mr-md-2">
+                                                <div class="form-group">
+                                                    <div class="form-field">
+                                                        <div class="select-wrap">
+                                                            <div class="icon"><span class="fa fa-times"></span></div>
+                                                            <select class="form-control" ng-model="selectedSubProduct">
+                                                                <option value="" disabled selected>Məhsullar</option>
+                                                                <option ng-repeat="value in allSubSearch">{{value.name}}</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md">
+                                                <div class="form-group">
+                                                    <div class="form-field">
+                                                        <button type="button" ng-click="setSingleSubProduct(selectedSubProduct)" class="form-control btn btn-primary">
+                                                            Axtar
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
+<section class="ftco-section ftco-no-pt ftco-no-pb">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="category-wrap">
+                    <div class="row no-gutters">
+                        <div class="col-md-2" ng-repeat="elem in products">
+                            <a href="" ng-click="getSubProduct(elem.id)">
+                                <div class="top-category text-center no-border-left">
+                                    <h3 ng-bind="elem.name">Süd məhsulları</h3>
+                                    <br>
+                                    <img ng-src="{{elem.photo}}">
+                                    <br>
+                                    <br>
+                                    <p><span ng-bind="elem.description">Növdə təzə məhsullarımız</span>
+                                    </p>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="ftco-section">
+    <div class="col-md-12">
+        <div class="row">
+            <div class="col-md-1"></div>
+            <div class="col-md-10">
+                <div class="container-fluid">
+                    <div class="row justify-content-center mb-5">
+                        <div class="col-md-7 heading-section text-center ftco-animate">
+                            <span class="subheading">Məhsullar</span>
+                            <h2 class="mb-0">Ən çox satılan məhsullarımız</h2>
+                        </div>
+                    </div>
+                    <div class="row">
+						<div class="flip-box" ng-repeat="elem in subproducts">
+							<div class="flip-box-inner">
+								<div class="flip-box-front">
+									<img ng-src="{{elem.subProduct.photo}}" width="100%" height="100%">
+								</div>
+								<div class="flip-box-back">
+									<h2 style="color: yellow" ng-bind="elem.subProduct.name">Front Side</h2>
+									<h5 style="color: white">Qiyməti:{{elem.subProduct.price}} AZN</h5>
+									<h3 style="color: white">Satış sayı</h3>
+									<h2 ng-bind="elem.maxCount"></h2>
+								</div>
+							</div>
+						</div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="col-md-1"></div>
+        </div>
+    </div>
+</section>
+
+<section class="ftco-section services-section">
+    <div class="container">
+        <div class="row d-flex">
+            <div class="col-md-3 d-flex align-self-stretch ftco-animate" style="text-align: center">
+                <div class="media block-6 services d-block">
+                    <div class="icon"><img src="../img/index/page_icon/order.png"></div>
+                    <div class="media-body">
+                        <h3 class="heading mb-3">Qısa zamanda xidmət</h3>
+                        <p>Sifarişdən dərhal sonra təqdim edilmiş zaman kəsiyində məhsulun sizə təqdim edilməsi</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 d-flex align-self-stretch ftco-animate" style="text-align: center">
+                <div class="media block-6 services d-block">
+                    <div class="icon"><img src="../img/index/page_icon/quality.png"></div>
+                    <div class="media-body">
+                        <h3 class="heading mb-3">Rahat Idarəetmə paneli</h3>
+                        <p> Qeydiyyatdan keçdikdən sonra sistemdə istəklərinizə uyğun olaraq rahat idarəetmə paneli</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 d-flex align-self-stretch ftco-animate" style="text-align: center">
+                <div class="media block-6 services d-block">
+                    <div class="icon"><img src="../img/index/gift.png"></div>
+                    <div class="media-body">
+                        <h3 class="heading mb-3">Əlavə bonuslar</h3>
+                        <p>Hər sifarişinizdən sonra məhsula uyğun olaraq bonus qazanma imkanı</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 d-flex align-self-stretch ftco-animate" style="text-align: center">
+                <div class="media block-6 services d-block">
+                    <div class="icon"><img src="../img/index/page_icon/delivery.png"></div>
+                    <div class="media-body">
+                        <h3 class="heading mb-3">Ünvana çatdırma</h3>
+                        <p>Ünvanınıza birbaşa çatdırılma xidməti</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="ftco-section bg-light">
+    <div class="container">
+        <div class="row justify-content-center mb-5 pb-3">
+            <div class="col-md-7 heading-section text-center ftco-animate">
+                <span class="subheading">Dadlı və Təzə</span>
+                <h2><span>Yep-yeni </span>məhsullarımız</h2>
+            </div>
+        </div>
+        <div class="row d-flex">
+            <div class="col-md-3 d-flex ftco-animate">
+                <div class="blog-entry align-self-stretch">
+                    <a href="" class="block-20"
+                       style="background-image: url('../img/index/page_icon/grocery.jpg');">
+                    </a>
+                    <div class="text mt-3">
+                        <div class="meta mb-2">
+                            <div><a href="#">İyun 10, 2020</a></div>
+                            <div><a href="#">Meyvə tərəvəz</a></div>
+                        </div>
+                        <h3 class="heading"><a href="#">Göyərtilərimizlə yeməklərinizdə fərq hissi yaşayacaq və
+                            vitaminlərlə övladınızı daha sağlam böyüdəcəksiniz</a></h3>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 d-flex ftco-animate">
+                <div class="blog-entry align-self-stretch">
+                    <a href="" class="block-20"
+                       style="background-image: url('../img/index/page_icon/meatindex.jpg');">
+                    </a>
+                    <div class="text mt-3">
+                        <div class="meta mb-2">
+                            <div><a href="#">İyun 10, 2020</a></div>
+                            <div><a href="#">Ət məhsulları</a></div>
+                        </div>
+                        <h3 class="heading"><a href="#">Şəki şəhəri və kəndlərində kəsilmiş halal və dadlı ət məhsulları
+                            ilə süfrəniz daha bərəkətli və yeməkləriniz daha dadlı olacaq</a></h3>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 d-flex ftco-animate">
+                <div class="blog-entry align-self-stretch">
+                    <a href="" class="block-20"
+                       style="background-image: url('../img/index/page_icon/sheki_halva.jpg');">
+                    </a>
+                    <div class="text mt-3">
+                        <div class="meta mb-2">
+                            <div><a href="#">İyun 10, 2020</a></div>
+                            <div><a href="#">Şəki halvası</a></div>
+                        </div>
+                        <h3 class="heading"><a href="#">Şəkimizin gözü olan ən dadlı nemətimizi sizə təqdim edirik. Əsl
+                            Şəki halvasının dadına sizdə baxın</a></h3>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 d-flex ftco-animate">
+                <div class="blog-entry align-self-stretch">
+                    <a href="" class="block-20"
+                       style="background-image: url('../img/index/page_icon/tursu.jpg');">
+                    </a>
+                    <div class="text mt-3">
+                        <div class="meta mb-2">
+                            <div><a href="#">İyun 10, 2020</a></div>
+                            <div><a href="#">Turşu məhsulları</a></div>
+                        </div>
+                        <h3 class="heading"><a href="#">İstənilən növ turşularımızın dadı ilə qışıda yay kimi
+                            keçirəcəksiniz</a></h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="ftco-section-parallax">
+    <div class="parallax-img d-flex align-items-center">
+        <div class="container">
+            <div class="row d-flex justify-content-center">
+                <div class="col-md-7 text-center heading-section heading-section-white ftco-animate">
+                    <h2>Yenilikləri anında əldə etmək üçün üzv olun</h2>
+                    <p>Mailinizi qeyd etməklə yenilikləri anında mailinizə göndərək</p>
+                    <div class="row d-flex justify-content-center mt-4 mb-4">
+                        <div class="col-md-12">
+                            <form action="" class="subscribe-form">
+                                <div class="form-group d-flex">
+                                    <input type="text" class="form-control" ng-model="newMail"
+                                           placeholder="Mailinizi daxil edin">
+                                    <input type="submit" ng-click="subscribe(newMail)" data-toggle="modal"
+                                           data-target="#confirmMail" value="Üzv olun" class="submit px-3">
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<footer class="ftco-footer ftco-bg-dark ftco-section">
+    <div class="container">
+        <div class="row mb-5">
+            <div class="col-md">
+                <div class="ftco-footer-widget mb-4">
+                    <h2 class="ftco-heading-2">Şəki şəhəri</h2>
+                    <p>Şəki şəhəri bölgədə ən dağlıq ərazi olduğudan burada yetişən istənilən heyvanın əti daha dadlı və
+                        vitaminli olur. Buna görədə süfərinizdə yeməklərinizin dadını hiss
+                        etmək və vitaminlərlə zəngin məhsullarımızdan qidalanmaq istəyirsinizsə müraciət edə
+                        bilərsiniz</p>
+                    <ul class="ftco-footer-social list-unstyled float-md-left float-lft mt-3">
+                        <li class="ftco-animate"><a href="http://www.facebook.com/mehman.hummetli/"><span
+                                class="fa fa-facebook"></span></a></li>
+                        <li class="ftco-animate"><a href="https://www.linkedin.com/in/mehman-hummatli-38996182/"><span class="fa fa-linkedin"></span></a></li>
+                        <li class="ftco-animate"><a href="https://www.instagram.com/mehmanhummetli/"><span class="fa fa-instagram"></span></a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md">
+                <div class="ftco-footer-widget mb-4 ml-md-4">
+                    <h2 class="ftco-heading-2">Hesab</h2>
+                    <ul class="list-unstyled">
+                        <li><a href="/login" class="pb-1 d-block">Mənim hesabım</a></li>
+                        <li><a href="/login" class="pb-1 d-block">Daxil ol</a></li>
+                        <li><a href="/register" class="pb-1 d-block">Yeni istifadəçi</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md">
+                <div class="ftco-footer-widget mb-4">
+                    <h2 class="ftco-heading-2">Sualınız varmı?</h2>
+                    <div class="block-23 mb-3">
+                        <ul>
+                            <li><span class="fa fa-address-book" style="font-size: 20px">Şəki şəhər, Fətəli xan Xoyski küçəsi</span>
+                            </li>
+                            <li><a href="#"><span class="fa fa-phone" style="font-size: 20px"></span><span class="text">&nbsp;+994 55 8212558</span></a>
+                            </li>
+                            <li><a href=""><span class="fa fa-send-o" style="font-size: 20px"></span><span class="text">yourtasties@gmail.com</span></a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12 text-center">
+
+                <p>Müəllif hüquqları &copy;<script>document.write(new Date().getFullYear());</script>
+                    tam qorunur | Bu səhifə Mehman Hümmətli tərəfindən hazırlanmışdır.
+                    </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+<!-- loader -->
+<div id="ftco-loader" class="show fullscreen">
+    <svg class="circular" width="48px" height="48px">
+        <circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/>
+        <circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10"
+                stroke="#F96D00"/>
+    </svg>
+</div>
+
+<div class="modal fade" id="confirmMail" role="dialog">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header panel panel-blue">
+                <h3 class="modal-title" style="color: black; text-align: center; ">
+                    <strong class="align-content-center" style="text-align: center;font-family: 'Times New Roman'">Üzvülük</strong>
+                </h3>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <p style="font-family: 'Times New Roman'">Hörmətli müştəri, mailiniz qeydiyyata alındı.</p>
+                            <p>Təşəkkür edirik</p>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <div class="row" style="align-items: center">
+                    <div class="col-md-12">
+                        <button type="button" class="btn btn-danger fa-pull-left"
+                                data-dismiss="modal">
+                            Bağla
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+<div class="modal fade" id="showProduct" role="dialog">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header panel panel-blue">
+                <h3 class="modal-title" style="color: black; text-align: center; ">
+                    <strong class="align-content-center" style="text-align: center;font-family: 'Times New Roman'">Hesabınıza
+                        yatırım</strong>
+                </h3>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <p style="font-family: 'Times New Roman'">Hörmətli müştəri, qeydiyyatdan keçməyə vaxtınız
+                                yoxdursa və ya sifarişlərinizi sistemə yükləmək istəmirsinizsə, bizimlə
+                                əlaqə yarada bilərsiniz. Biz sizdən hesabınıza yükləmək istədiyiniz məbləği alıb, lazım
+                                olan sənədləri imzaladıqdan sonra
+                                sizin əvəzinizə xidmət haqqı hesablamadan sistemə yükləyəcəyik. Bundan sonra sizin mobil
+                                telefona email və şifrəniz göndəriləcəkdir və
+                                siz istədiyiniz zaman sistemə daxil olaraq hesabınızdakı məbləğ qədər məhsul sifariş
+                                edə, bonuslar qazana bilərsiniz.</p>
+                            <p><b>Qeyd: Hesaba yatırım etməklə daha böyük bonuslar qazanmaq mümkündür</b></p>
+                            <p>Hesabınızı artırmaq üçün <strong>+99455 8212558</strong> nömrəsi ilə əlaqə yarada
+                                bilərsiniz</p>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <div class="row" style="align-items: center">
+                    <!--					  <div class="col-md-1">-->
+
+                    <!--					  </div>-->
+                    <div class="col-md-12">
+                        <button type="button" class="btn btn-danger fa-pull-left"
+                                data-dismiss="modal">
+                            Bağla
+                        </button>
+
+
+                        <!--					  </div>-->
+                        <!--					  <div class="col-md-1">-->
+
+                        <!--					  </div>-->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+<div class="modal fade" id="showSubProduct" role="dialog">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header panel panel-blue">
+                <h3 class="modal-title" style="color: black; text-align: center; ">
+                    <strong class="align-content-center" style="text-align: center;font-family: 'Times New Roman'">Hesabınıza
+                        yatırım</strong>
+                </h3>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <p style="font-family: 'Times New Roman'">Hörmətli müştəri, qeydiyyatdan keçməyə vaxtınız
+                                yoxdursa və ya sifarişlərinizi sistemə yükləmək istəmirsinizsə, bizimlə
+                                əlaqə yarada bilərsiniz. Biz sizdən hesabınıza yükləmək istədiyiniz məbləği alıb, lazım
+                                olan sənədləri imzaladıqdan sonra
+                                sizin əvəzinizə xidmət haqqı hesablamadan sistemə yükləyəcəyik. Bundan sonra sizin mobil
+                                telefona email və şifrəniz göndəriləcəkdir və
+                                siz istədiyiniz zaman sistemə daxil olaraq hesabınızdakı məbləğ qədər məhsul sifariş
+                                edə, bonuslar qazana bilərsiniz.</p>
+                            <p><b>Qeyd: Hesaba yatırım etməklə daha böyük bonuslar qazanmaq mümkündür</b></p>
+                            <p>Hesabınızı artırmaq üçün <strong>+99455 8212558</strong> nömrəsi ilə əlaqə yarada
+                                bilərsiniz</p>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <div class="row" style="align-items: center">
+                    <!--					  <div class="col-md-1">-->
+
+                    <!--					  </div>-->
+                    <div class="col-md-12">
+                        <button type="button" class="btn btn-danger fa-pull-left"
+                                data-dismiss="modal">
+                            Bağla
+                        </button>
+
+
+                        <!--					  </div>-->
+                        <!--					  <div class="col-md-1">-->
+
+                        <!--					  </div>-->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+<div class="modal fade" id="subscribe" role="dialog">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header panel panel-blue">
+                <h3 class="modal-title" style="color: black; text-align: center; ">
+                    <strong class="align-content-center" style="text-align: center;font-family: 'Times New Roman'">Hesabınıza
+                        yatırım</strong>
+                </h3>
+            </div>
+            <div class="modal-body">
+                <h1>Mailiniz sistemə əlavə edildi. Olacaq hər bir yenilikdən xəbər alacaqsınız</h1>
+                <h6>Üzv olduğunuz üçün təşəkkür edirik</h6>
+            </div>
+            <div class="modal-footer">
+                <div class="row" style="align-items: center">
+                    <div class="col-md-12">
+                        <button type="button" class="btn btn-danger fa-pull-left"
+                                data-dismiss="modal">
+                            Bağla
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+<script src="../angular/angular.js"></script>
+<script src="../angular/projectApp.js"></script>
+<script src="../angular/index/indexController.js"></script>
+<script src="../angular/index/indexService.js"></script>
+
+<script src="../js/index/jquery.min.js"></script>
+<script src="../js/index/jquery-migrate-3.0.1.min.js"></script>
+<script src="../js/index/jquery.easing.1.3.js"></script>
+<script src="../js/index/jquery.waypoints.min.js"></script>
+<script src="../js/index/jquery.stellar.min.js"></script>
+<script src="../js/index/owl.carousel.min.js"></script>
+<script src="../js/index/jquery.magnific-popup.min.js"></script>
+<script src="../js/index/aos.js"></script>
+<script src="../js/index/jquery.animateNumber.min.js"></script>
+<script src="../js/index/scrollax.min.js"></script>
+<script src="../js/index/main.js"></script>
+
+
+</body>
+</html>

@@ -1,0 +1,892 @@
+<!doctype html>
+<html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
+<html class="no-js lt-ie9 lt-ie8" lang=""> <![endif]-->
+<html class="no-js lt-ie9" lang=""> <![endif]-->
+<html class="no-js" lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Sufee Admin - HTML5 Admin Template</title>
+    <meta name="description" content="Sufee Admin - HTML5 Admin Template">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="apple-touch-icon" href="apple-icon.png">
+    <link rel="shortcut icon" href="favicon.ico">
+
+
+    <link rel="stylesheet" href="css/adminView/bootstrap.min.css">
+    <link rel="stylesheet" href="css/adminView/font-awesome.min.css">
+    <link rel="stylesheet" href="css/adminView/themify-icons.css">
+    <link rel="stylesheet" href="css/adminView/cs-skin-elastic.css">
+    <link rel="stylesheet" href="css/adminView/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" href="css/adminView/buttons.bootstrap4.min.css">
+
+
+    <link rel="stylesheet" href="css/adminView/jqvmap.min.css">
+
+
+    <link rel="stylesheet" href="css/adminView/style.css">
+
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800' rel='stylesheet' type='text/css'>
+    <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-173551031-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-173551031-1');
+    </script>
+
+</head>
+
+<body ng-app="myProjectApp" ng-controller="customerController">
+
+
+<!-- Left Panel -->
+
+<aside id="left-panel" class="left-panel">
+    <nav class="navbar navbar-expand-sm navbar-default">
+
+        <div class="navbar-header">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#main-menu"
+                    aria-controls="main-menu" aria-expanded="false" aria-label="Toggle navigation">
+                <i class="fa fa-bars"></i>
+            </button>
+        </div>
+
+        <div id="main-menu" class="main-menu collapse navbar-collapse">
+            <ul class="nav navbar-nav">
+                <li class="menu-item">
+                    <a href="/adminView"> <i class="menu-icon fa fa-dashboard"></i>Dashboard </a>
+                </li>
+                <h3 class="menu-title">Control Panel</h3><!-- /.menu-title -->
+                <li class="menu-item-has-children dropdown active">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
+                       aria-expanded="false"> <i class="menu-icon fa fa-laptop"></i>Components</a>
+                    <ul class="sub-menu children dropdown-menu">
+                        <li><i class="fa fa-puzzle-piece"></i><a href="/adminProduct">Ana məhsullar</a></li>
+                        <li><i class="fa fa-id-badge"></i><a href="/adminSubProduct">Məhsullar</a></li>
+                        <li><i class="fa fa-bars"></i><a href="/adminOrders">Sifarişlər</a></li>
+                        <li><i class="fa fa-share-square-o"></i><a href="/adminCustomer">Müştərinin məlumatları</a></li>
+                        <li><i class="fa fa-id-card-o"></i><a href="/adminMessage">Mesajlar</a></li>
+                        <li><i class="fa fa-id-card-o"></i><a href="/adminStore">Depo</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div><!-- /.navbar-collapse -->
+    </nav>
+</aside><!-- /#left-panel -->
+
+<!-- Left Panel -->
+
+<!-- Right Panel -->
+
+<div id="right-panel" class="right-panel">
+
+    <!-- Header-->
+    <header id="header" class="header">
+
+        <div class="header-menu">
+
+            <div class="col-sm-7">
+                <a id="menuToggle" class="menutoggle pull-left"><i class="fa fa fa-tasks"></i></a>
+                <h5 style="font-style:italic;color:purple">Müştərilər</h5>
+            </div>
+
+            <div class="col-sm-5">
+                <div class="user-area dropdown float-right">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
+                       aria-expanded="false">
+                        <img class="user-avatar rounded-circle" ng-src="{{photo}}">Səhifənizə xoş gəlmisiniz
+                        <h4 ng-bind="getUser.name" style="color: green; text-align: center"></h4>
+                    </a>
+
+                    <div class="user-menu dropdown-menu">
+                        <a class="nav-link" href="/adminProduct"><i class="fa fa-user"></i> Ana məhsullar</a>
+
+                        <a class="nav-link" href="/adminSubProduct"><i class="fa fa-user"></i> Məhsullar</a>
+                        <a class="nav-link" href="/adminCustomer"><i class="fa fa-user"></i> Müştərilər</a>
+                        <a class="nav-link" href="/adminMessage"><i class="fa fa-user"></i> Mesajlar
+                            <h7 style="color: white; background-color: black">{{getMessage}}</h7>
+                        </a>
+
+
+                        <a class="nav-link" href="/logout"><i class="fa fa-power-off"></i> Çıxış</a>
+                    </div>
+                </div>
+
+                <div class="language-select dropdown" id="language-select">
+                    <a class="dropdown-toggle" href="#" data-toggle="dropdown" id="language" aria-haspopup="true"
+                       aria-expanded="true">
+                        <i class="flag-icon flag-icon-us"></i>
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="language">
+                        <div class="dropdown-item">
+                            <span class="flag-icon flag-icon-fr"></span>
+                        </div>
+                        <div class="dropdown-item">
+                            <i class="flag-icon flag-icon-es"></i>
+                        </div>
+                        <div class="dropdown-item">
+                            <i class="flag-icon flag-icon-us"></i>
+                        </div>
+                        <div class="dropdown-item">
+                            <i class="flag-icon flag-icon-it"></i>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </header><!-- /header -->
+    <!-- Header-->
+
+
+
+    <div class="content mt-3">
+
+        <div class="col-xl-4 col-lg-6">
+            <div class="card">
+                <div class="card-body">
+                    <div class="stat-widget-one">
+                        <div class="stat-icon dib"><i class="fa fa-briefcase" style="color: #ff7400"></i></div>
+                        <div class="stat-content dib">
+                            <div class="stat-text">Müştərilər</div>
+                            <div class="stat-digit" ng-bind="getActiveCount"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="col-xl-4 col-lg-6">
+            <div class="card">
+                <div class="card-body">
+                    <div class="stat-widget-one">
+                        <div class="stat-icon dib"><i class="fa fa-check-square" style="color: green"></i></div>
+                        <div class="stat-content dib">
+                            <div class="stat-text">Yeni müştərilər</div>
+                            <div class="stat-digit" ng-bind="getDeactiveCount"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xl-4 col-lg-6">
+            <div class="card">
+                <div class="card-body">
+                    <div class="stat-widget-one">
+                        <div class="stat-icon dib"><i class="fa fa-lock" style="color: darkred"></i></div>
+                        <div class="stat-content dib">
+                            <div class="stat-text">Bloklanmış müştərilər</div>
+                            <div class="stat-digit" ng-bind="getBlockedCount"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+        <div class="card">
+            <div class="card-header">
+                <span><strong>Bloklanmış müştərilər</strong></span>
+            </div>
+            <div class="card-body">
+                <div class="dataTables_wrapper dt-bootstrap4 no-footer">
+
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <table class="table table-dark" role="grid"
+                                   aria-describedby="bootstrap-data-table-export_info" style="text-align: center">
+                                <thead>
+                                <tr role="row">
+                                    <th class="sorting_asc" tabindex="0"
+                                        aria-controls="bootstrap-data-table-export" rowspan="1" colspan="1"
+                                        aria-sort="ascending"
+                                        aria-label="Name: activate to sort column descending"
+                                        style="width: 20px;">ID
+                                    </th>
+                                    <th class="sorting" tabindex="0" aria-controls="bootstrap-data-table-export"
+                                        rowspan="1" colspan="1"
+                                        aria-label="Position: activate to sort column ascending"
+                                        style="width: 100px;">Adı
+                                    </th>
+                                    <th class="sorting" tabindex="0" aria-controls="bootstrap-data-table-export"
+                                        rowspan="1" colspan="1"
+                                        aria-label="Office: activate to sort column ascending"
+                                        style="width: 150px;">Soyadı
+                                    </th>
+                                    <th class="sorting" tabindex="0" aria-controls="bootstrap-data-table-export"
+                                        rowspan="1" colspan="1"
+                                        aria-label="Position: activate to sort column ascending"
+                                        style="width: 80px;">Əlaqə nömrəsi
+                                    </th>
+                                    <th class="sorting" tabindex="0" aria-controls="bootstrap-data-table-export"
+                                        rowspan="1" colspan="1"
+                                        aria-label="Salary: activate to sort column ascending"
+                                        style="width: 30px;">Yaşı
+                                    </th>
+                                    <th class="sorting" tabindex="0" aria-controls="bootstrap-data-table-export"
+                                        rowspan="1" colspan="1"
+                                        aria-label="Position: activate to sort column ascending"
+                                        style="width: 80px;">Maili
+                                    </th>
+                                    <th class="sorting" tabindex="0" aria-controls="bootstrap-data-table-export"
+                                        rowspan="1" colspan="1"
+                                        aria-label="Position: activate to sort column ascending"
+                                        style="width: 60px;">Şifrə
+                                    </th>
+                                    <th class="sorting" tabindex="0" aria-controls="bootstrap-data-table-export"
+                                        rowspan="1" colspan="1"
+                                        aria-label="Position: activate to sort column ascending"
+                                        style="width: 30px;">Statusu
+                                    </th>
+                                    <th class="sorting" tabindex="0" aria-controls="bootstrap-data-table-export"
+                                        rowspan="1" colspan="1"
+                                        aria-label="Position: activate to sort column ascending"
+                                        style="width: 100px;">Əməliyyat
+                                    </th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr role="row" class="odd" ng-repeat="elem in getBlockedCustomers">
+                                    <td class="sorting_1" ng-bind="elem.id"></td>
+                                    <td ng-bind="elem.name"></td>
+                                    <td ng-bind="elem.surname"></td>
+                                    <td ng-bind="elem.phone"></td>
+                                    <td ng-bind="elem.age"></td>
+                                    <td ng-bind="elem.email"></td>
+                                    <td ng-bind="elem.password"></td>
+                                    <td ng-bind="elem.status"></td>
+                                    <td>
+                                        <a href="" title="Alışlarına bax" class="btn btn-info" ng-click="getCustomerSell(elem.id)">
+                                            <i class="fa fa-eye"></i>
+                                        </a>
+
+                                        <a href="" data-toggle="modal" data-target="#editModal" title="Dəyiş"
+                                           class="btn btn-warning" ng-click="setEditCustomer(elem.id)"><i
+                                                class="fa fa-pencil"></i></a>
+
+                                        <a href="" data-toggle="modal" data-target="#deleteModal" title="Sil"
+                                           class="btn btn-danger" ng-click="getService(elem.id)"><i
+                                                class="fa fa-trash"></i></a>
+
+                                        <a href="" title="Blokdan çıxart"
+                                           class="btn btn-success" ng-click="getService(elem.id)"><i
+                                                class="fa fa-unlock-alt" ng-click="setUnlockCustomers(elem.id)"></i></a>
+
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+
+        <div class="card">
+            <div class="card-header">
+                <span><strong>Müştərilərin məlumatları</strong></span>
+            </div>
+            <div class="card-body">
+                <div class="dataTables_wrapper dt-bootstrap4 no-footer">
+
+                    <div class="row">
+
+                        <div class="col-sm-12">
+                            <div class="row">
+                                <div class="col-md-3">
+                                <div class="form-group">
+                                    <label>Müştərinin adı</label>
+                                    <input type="text" class="form-control">
+                                </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label>Müştərinin soyadı</label>
+                                        <input type="text" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label>Müştərinin statusu</label>
+                                        <select class="form-control">
+                                            <option>Active</option>
+                                            <option>Deactive</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                        <a href="" class="btn btn-danger float-right" title="Clear">Təmizlə</a>
+                                        <a href="" class="btn btn-success float-right" title="Search">Axtar</a>
+                                </div>
+                            </div>
+                            <table class="table table-dark" role="grid"
+                                   aria-describedby="bootstrap-data-table-export_info" style="text-align: center">
+                                <thead>
+                                <tr role="row">
+                                    <th class="sorting_asc" tabindex="0"
+                                        aria-controls="bootstrap-data-table-export" rowspan="1" colspan="1"
+                                        aria-sort="ascending"
+                                        aria-label="Name: activate to sort column descending"
+                                        style="width: 20px;">ID
+                                    </th>
+                                    <th class="sorting" tabindex="0" aria-controls="bootstrap-data-table-export"
+                                        rowspan="1" colspan="1"
+                                        aria-label="Position: activate to sort column ascending"
+                                        style="width: 100px;">Adı
+                                    </th>
+                                    <th class="sorting" tabindex="0" aria-controls="bootstrap-data-table-export"
+                                        rowspan="1" colspan="1"
+                                        aria-label="Office: activate to sort column ascending"
+                                        style="width: 150px;">Soyadı
+                                    </th>
+                                    <th class="sorting" tabindex="0" aria-controls="bootstrap-data-table-export"
+                                        rowspan="1" colspan="1"
+                                        aria-label="Position: activate to sort column ascending"
+                                        style="width: 80px;">Əlaqə nömrəsi
+                                    </th>
+                                    <th class="sorting" tabindex="0" aria-controls="bootstrap-data-table-export"
+                                        rowspan="1" colspan="1"
+                                        aria-label="Salary: activate to sort column ascending"
+                                        style="width: 30px;">Yaşı
+                                    </th>
+                                    <th class="sorting" tabindex="0" aria-controls="bootstrap-data-table-export"
+                                        rowspan="1" colspan="1"
+                                        aria-label="Position: activate to sort column ascending"
+                                        style="width: 80px;">Maili
+                                    </th>
+                                    <th class="sorting" tabindex="0" aria-controls="bootstrap-data-table-export"
+                                        rowspan="1" colspan="1"
+                                        aria-label="Position: activate to sort column ascending"
+                                        style="width: 60px;">Şifrə
+                                    </th>
+                                    <th class="sorting" tabindex="0" aria-controls="bootstrap-data-table-export"
+                                        rowspan="1" colspan="1"
+                                        aria-label="Position: activate to sort column ascending"
+                                        style="width: 100px;">Əməliyyat
+                                    </th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr role="row" class="odd" ng-repeat="elem in getActiveCustomers">
+                                    <td class="sorting_1" ng-bind="elem.id"></td>
+                                    <td ng-bind="elem.name"></td>
+                                    <td ng-bind="elem.surname"></td>
+                                    <td ng-bind="elem.phone"></td>
+                                    <td ng-bind="elem.age"></td>
+                                    <td ng-bind="elem.email"></td>
+                                    <td ng-bind="elem.password"></td>
+                                    <td>
+                                        <a href="" title="Alışlarına bax" class="btn btn-info" ng-click="getCustomerSell(elem.id)">
+                                            <i class="fa fa-eye"></i></a>
+
+                                        <a href="" data-toggle="modal" data-target="#userMoney" title="Balansa bax"
+                                           class="btn btn-success" ng-click="getUserBalansData(elem.id)">
+                                            <i class="fa fa-money"></i></a>
+
+                                        <a href="" data-toggle="modal" data-target="#editModal" title="Dəyiş"
+                                           class="btn btn-warning" ng-click="setEditCustomer(elem.id)"><i
+                                                class="fa fa-pencil"></i></a>
+
+                                        <a href="" data-toggle="modal" data-target="#deleteModal" title="Sil"
+                                           class="btn btn-danger" ng-click="getService(elem.id)"><i
+                                                class="fa fa-trash"></i></a>
+
+                                        <a href="" data-toggle="modal" data-target="#deleteModal" title="Blok elə"
+                                           class="btn btn-dark" ng-click="setBlockCustomers(elem.id)"><i
+                                                class="fa fa-lock"></i></a>
+
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-header">
+                <span><strong>Seçilmiş müştərilərin alışları</strong></span>
+            </div>
+            <div class="card-body">
+                <div class="dataTables_wrapper dt-bootstrap4 no-footer">
+
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <table class="table table-dark" role="grid"
+                                   aria-describedby="bootstrap-data-table-export_info" style="text-align: center">
+                                <thead>
+                                <tr role="row">
+                                    <th class="sorting_asc" tabindex="0"
+                                        aria-controls="bootstrap-data-table-export" rowspan="1" colspan="1"
+                                        aria-sort="ascending"
+                                        aria-label="Name: activate to sort column descending"
+                                        style="width: 40px;">ID
+                                    </th>
+                                    <th class="sorting" tabindex="0" aria-controls="bootstrap-data-table-export"
+                                        rowspan="1" colspan="1"
+                                        aria-label="Position: activate to sort column ascending"
+                                        style="width: 120px;">Məhsulun adı
+                                    </th>
+                                    <th class="sorting" tabindex="0" aria-controls="bootstrap-data-table-export"
+                                        rowspan="1" colspan="1"
+                                        aria-label="Office: activate to sort column ascending"
+                                        style="width: 80px;">Sayı
+                                    </th>
+                                    <th class="sorting" tabindex="0" aria-controls="bootstrap-data-table-export"
+                                        rowspan="1" colspan="1"
+                                        aria-label="Position: activate to sort column ascending"
+                                        style="width: 80px;">Qiyməti
+                                    </th>
+                                    <th class="sorting" tabindex="0" aria-controls="bootstrap-data-table-export"
+                                        rowspan="1" colspan="1"
+                                        aria-label="Salary: activate to sort column ascending"
+                                        style="width: 80px;">Cəmi qiyməti
+                                    </th>
+                                    <th class="sorting" tabindex="0" aria-controls="bootstrap-data-table-export"
+                                        rowspan="1" colspan="1"
+                                        aria-label="Position: activate to sort column ascending"
+                                        style="width: 80px;">Ödənilməmiş məbləğ
+                                    </th>
+                                    <th class="sorting" tabindex="0" aria-controls="bootstrap-data-table-export"
+                                        rowspan="1" colspan="1"
+                                        aria-label="Position: activate to sort column ascending"
+                                        style="width: 80px;">Bonusu
+                                    </th>
+                                    <th class="sorting" tabindex="0" aria-controls="bootstrap-data-table-export"
+                                        rowspan="1" colspan="1"
+                                        aria-label="Position: activate to sort column ascending"
+                                        style="width: 80px;">Tarix
+                                    </th>
+                                    <th class="sorting" tabindex="0" aria-controls="bootstrap-data-table-export"
+                                        rowspan="1" colspan="1"
+                                        aria-label="Position: activate to sort column ascending"
+                                        style="width: 100px;">Əməliyyat
+                                    </th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr role="row" class="odd" ng-repeat="elem in lookCustomerSell">
+                                    <td class="sorting_1" ng-bind="elem.id"></td>
+                                    <td ng-bind="elem.subProduct.name"></td>
+                                    <td ng-bind="elem.count"></td>
+                                    <td ng-bind="elem.price"></td>
+                                    <td ng-bind="elem.sum_price"></td>
+                                    <td ng-bind="elem.unpaid"></td>
+                                    <td ng-bind="elem.bonus"></td>
+                                    <td ng-bind="elem.date"></td>
+                                    <td>
+                                        <a href="" data-toggle="modal" data-target="#lookModal" title="Bax"
+                                           class="btn btn-info" ng-click="getService(read.id)"><i class="fa fa-eye"></i></a>
+
+                                        <a href="" data-toggle="modal" data-target="#editModal" title="Cavabla"
+                                           class="btn btn-warning" ng-click="getService(read.id)"><i
+                                                class="fa fa-comments-o"></i></a>
+
+                                        <a href="" data-toggle="modal" data-target="#deleteModal" title="Sil"
+                                           class="btn btn-danger" ng-click="getService(read.id)"><i
+                                                class="fa fa-trash"></i></a>
+
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <div class="modal fade" id="editModal" role="dialog">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header panel panel-red">
+                        <h3 class="modal-title" style="color: black; text-align: center;">
+                            <strong class="align-content-center"
+                                    style="text-align: center;font-family: 'Times New Roman'">
+                                <center>Seçilmiş müştərinin məlumaları</center>
+                            </strong>
+                        </h3>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <label>Customer name</label>
+                                <input type="text" value="{{editCustomer.name}}">
+                            </div>
+                            <div class="col-md-4">
+                                <label>Customer surname</label>
+                                <input type="text" value="{{editCustomer.surname}}">
+                            </div>
+                            <div class="col-md-4">
+                                <label>Customer age</label>
+                                <input type="text" value="{{editCustomer.age}}">
+                            </div>
+                        </div>
+                        <br>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label>Customer phone</label>
+                                    <input type="text" value="{{editCustomer.phone}}">
+                                </div>
+                                <div class="col-md-4">
+                                    <label>Customer email</label>
+                                    <input type="text" value="{{editCustomer.email}}">
+                                </div>
+                                <div class="col-md-4">
+                                    <label>Customer gender</label>
+                                    <select class="form-control">
+                                        <option selected>{{editCustomer.gender}}</option>
+                                        <option>Kişi</option>
+                                        <option>Qadın</option>
+                                    </select>
+                                </div>
+                            </div>
+                        <br>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <label>Customer address</label>
+                                    <textarea class="form-control" rows="5">{{editCustomer.address}}</textarea>
+                                </div>
+                            </div>
+                        </div>
+
+                    <div class="modal-footer">
+                        <div class="col-md-12">
+                            <div class="col-md-1">
+
+                            </div>
+                            <div class="col-md-5">
+                                <button type="button" class="btn btn-danger fa-pull-left"
+                                        data-dismiss="modal">
+                                    Bağla
+                                </button>
+                            </div>
+                            <div class="col-md-5">
+                                <button type="button" class="btn btn-success fa-pull-right"
+                                        data-dismiss="modal">
+                                    Yadda Saxla
+                                </button>
+                            </div>
+                            <div class="col-md-1">
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="modal fade" id="lookModal" role="dialog">
+            <div class="modal-dialog modal-md">
+                <div class="modal-content">
+                    <div class="modal-header panel panel-red">
+                        <h3 class="modal-title" style="color: black; text-align: center;">
+                            <strong class="align-content-center"
+                                    style="text-align: center;font-family: 'Times New Roman'">
+                                <center>Selected Service Information</center>
+                            </strong>
+                        </h3>
+                    </div>
+                    <div class="modal-body" ng-repeat="service in searchService">
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <img ng-src="{{service.photo}}">
+                            </div>
+                        </div>
+                        <br>
+                        <br>
+                        <div class="row">
+                            <div class="col-md-5">
+                                <div class="form-group">
+                                    <label>ID</label>
+                                    <span class="text-dark form-control" disabled>{{service.id}}</span>
+                                </div>
+                            </div>
+                            <div class="col-md-5">
+                                <div class="form-group">
+                                    <label>Status</label>
+                                    <span class="text-dark form-control" disabled>{{service.id}}</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label>Name</label>
+                                    <span class="text-dark form-control">{{service.name}}</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label>Note</label>
+                                    <span class="form-control">{{service.note}}</span>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <div class="col-md-12">
+                            <div class="col-md-1">
+
+                            </div>
+                            <div class="col-md-5">
+                                <button type="button" class="btn btn-danger fa-pull-left"
+                                        data-dismiss="modal">
+                                    Bağla
+                                </button>
+                            </div>
+                            <div class="col-md-5">
+                                <button type="button" class="btn btn-success fa-pull-right"
+                                        data-dismiss="modal">
+                                    Yadda Saxla
+                                </button>
+                            </div>
+                            <div class="col-md-1">
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade" id="deleteModal" role="dialog">
+            <div class="modal-dialog modal-md">
+                <div class="modal-content">
+                    <div class="modal-header panel panel-red">
+                        <h3 class="modal-title" style="color: black; text-align: center;">
+                            <strong class="align-content-center"
+                                    style="text-align: center;font-family: 'Times New Roman'">
+                                <center>Are sure to delete selected Service??</center>
+                            </strong>
+                        </h3>
+                    </div>
+                    <div class="modal-body" ng-repeat="service in searchService">
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <img ng-src="{{service.photo}}">
+                            </div>
+                        </div>
+                        <br>
+                        <br>
+                        <div class="row">
+                            <div class="col-md-5">
+                                <div class="form-group">
+                                    <label>ID</label>
+                                    <span class="text-dark form-control" disabled>{{service.id}}</span>
+                                </div>
+                            </div>
+                            <div class="col-md-5">
+                                <div class="form-group">
+                                    <label>Status</label>
+                                    <span class="text-dark form-control" disabled>{{service.id}}</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label>Name</label>
+                                    <span class="text-dark form-control">{{service.name}}</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label>Note</label>
+                                    <span class="form-control">{{service.note}}</span>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <div class="col-md-12">
+                            <div class="col-md-1">
+
+                            </div>
+                            <div class="col-md-5">
+                                <button type="button" class="btn btn-danger fa-pull-left"
+                                        data-dismiss="modal">
+                                    Bağla
+                                </button>
+                            </div>
+                            <div class="col-md-5">
+                                <button type="button" class="btn btn-success fa-pull-right"
+                                        data-dismiss="modal">
+                                    Bəli
+                                </button>
+                            </div>
+                            <div class="col-md-1">
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade" id="addService" role="dialog">
+            <div class="modal-dialog modal-md">
+                <div class="modal-content">
+                    <div class="modal-header panel panel-red">
+                        <h3 class="modal-title" style="color: black; text-align: center;">
+                            <strong class="align-content-center"
+                                    style="text-align: center;font-family: 'Times New Roman'">
+                                <center>Are sure to delete selected Service??</center>
+                            </strong>
+                        </h3>
+                    </div>
+                    <div class="modal-body" ng-repeat="service in searchService">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <table class="table table-dark">
+                                    <thead>
+                                        <tr>
+                                            <th>ID</th>
+                                            <th>Name</th>
+                                            <th>About</th>
+                                            <th>Price</th>
+                                            <th>Count</th>
+                                            <th>Check</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <div class="col-md-12">
+                            <div class="col-md-1">
+
+                            </div>
+                            <div class="col-md-5">
+                                <button type="button" class="btn btn-danger fa-pull-left"
+                                        data-dismiss="modal">
+                                    Bağla
+                                </button>
+                            </div>
+                            <div class="col-md-5">
+                                <button type="button" class="btn btn-success fa-pull-right"
+                                        data-dismiss="modal">
+                                    Bəli
+                                </button>
+                            </div>
+                            <div class="col-md-1">
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade" id="userMoney" role="dialog">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header panel panel-red">
+                        <h3 class="modal-title" style="color: black; text-align: center;">
+                            <strong class="align-content-center"
+                                    style="text-align: center;font-family: 'Times New Roman'">
+                                <center>Seçilmiş müştərinin balans məlumatları</center>
+                            </strong>
+                        </h3>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <table class="table table-dark" style="text-align: center">
+                                    <thead>
+                                    <tr>
+                                        <th>Etdiyi ödənişlər</th>
+                                        <th>Balansı</th>
+                                        <th>Tarix</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody ng-repeat="service in userAllBalance">
+                                    <tr>
+                                        <td ng-bind="service.payment"></td>
+                                        <td ng-bind="service.balance"></td>
+                                        <td ng-bind="service.date"></td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                                <input type="button" class="btn btn-primary" value="Irəli" ng-click="goNextBalans()">
+                                <input type="button" class="btn btn-primary" value="Geri" ng-click="goBackBalans()">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                               <label>Seçilmiş müştərinin bonusu: {{userBonus.bonus}}</label>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <div class="col-md-12">
+                                <button type="button" class="btn btn-danger fa-pull-left"
+                                        data-dismiss="modal">
+                                    Bağla
+                                </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> <!-- .content -->
+</div><!-- /#right-panel -->
+
+
+<script src="../angular/angular.js"></script>
+<script src="../angular/projectApp.js"></script>
+<script src="../angular/adminCustomer/adminCustomerController.js"></script>
+<script src="../angular/adminCustomer/adminCustomerService.js"></script>
+<!-- Right Panel -->
+
+<script src="js/adminView/jquery.min.js"></script>
+<script src="js/adminView/popper.min.js"></script>
+<script src="js/adminView/bootstrap.min.js"></script>
+<script src="js/adminView/main.js"></script>
+<script src="js/adminView/jquery.dataTables.min.js"></script>
+<script src="js/adminView/dataTables.bootstrap4.min.js"></script>
+<script src="js/adminView/dataTables.buttons.min.js"></script>
+<script src="js/adminView/buttons.bootstrap4.min.js"></script>
+<script src="js/adminView/jszip.min.js"></script>
+<script src="js/adminView/datatables-init.js"></script>
+<script src="js/adminView/buttons.html5.min.js"></script>
+<script src="js/adminView/buttons.print.min.js"></script>
+<script src="js/adminView/buttons.colVis.min.js"></script>
+
+
+<!--<script src="js/adminView/Chart.bundle.min.js"></script>-->
+<!--<script src="js/adminView/jquery.vmap.sampledata.js"></script>-->
+
+
+</body>
+
+</html>
